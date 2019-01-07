@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <title></title> 
+  <script type="text/javascript">  
+	  var socket;   
+	  var id  = "PC";
+	  if(window.WebSocket){  
+	      socket = new WebSocket("ws://localhost:7397");  
+	        
+	      socket.onmessage = function(event){             
+	            var data = JSON.parse(event.data);
+	            if(data.msgType=='img'){
+	            	document.querySelector("img").src=data.uri;
+	            }else{
+	            	appendln("receive:" + event.data); 
+	            }
+	      };  
+	   
+	      socket.onopen = function(event){  
+	            appendln("WebSocket is opened");  
+	            login(); 
+	      };  
+	   
+	      socket.onclose = function(event){  
+	            appendln("WebSocket is closed");  
+	      };  
+	  }else{  
+	        alert("WebSocket is not support");  
+	  }  
+	
+	    
+	  function appendln(text) {  
+	    var ta = document.querySelector('#responseText');  
+	    ta.value += text + "\r\n";  
+	  }  
+	    
+	  function login(){
+	      var date={"id":id,"type":"aa"};
+	      var login = JSON.stringify(date);
+	      socket.send(login);
+	  }
+	  
+	  function sendMessage(){
+		  var data = {"sender":id,"info":document.querySelector("input").value};
+	      socket.send(JSON.stringify(data));
+	  }
+	  
+  </script>
+ </head>  
+ <body> 
+ 	<div>
+	   <input type="text" name="message" value="hello" /> 
+	   <input type="button" name="send" value="聊天" onclick="sendMessage()" /> 
+ 	</div>
+ 	<div>
+ 		<div id="msg" style="width: 40%;float:left">
+		   <textarea id="responseText" style="width: 100%;height: 300px;"></textarea> 
+ 		</div>
+	 	<div id="phone" style="width: 45%;height: 300px;float:right">
+	    	<img alt="" src="">
+	 	</div>
+ 	</div>
+ </body>
+</html>

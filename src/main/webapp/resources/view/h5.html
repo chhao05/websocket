@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <title></title> 
+  
+ </head>  
+ <body> 
+ 	<div>
+	   <input type="text" name="message" value="hello" /> 
+	   <input type="button" name="send" value="聊天" onclick="sendMessage()"/> 
+	   <button>发图</button> 
+ 	</div>
+ 	<div>
+	   <textarea id="responseText" style="width: 800px;height: 300px;"></textarea> 
+ 	</div>
+ </body>
+ <script type="text/javascript" src="../dist/html2canvas.js"></script> 
+ <script type="text/javascript">  
+	  var socket;   
+	  var id  = "H5";
+	  if(window.WebSocket){  
+	      socket = new WebSocket("ws://localhost:7397");  
+	        
+	      socket.onmessage = function(event){             
+	            appendln("receive:" + event.data);  
+	      };  
+	   
+	      socket.onopen = function(event){  
+	            appendln("WebSocket is opened");  
+	            login(); 
+	      };  
+	   
+	      socket.onclose = function(event){  
+	            appendln("WebSocket is closed");  
+	      };  
+	  }else{  
+	        alert("WebSocket is not support");  
+	  }  
+	
+	    
+	  function appendln(text) {  
+	    var ta = document.querySelector('#responseText');  
+	    ta.value += text + "\r\n";  
+	  }  
+	    
+	  function login(){
+	      var date={"id":id,"type":"aa"};
+	      var login = JSON.stringify(date);
+	      socket.send(login);
+	  }
+	  
+	  function sendMessage(){
+		  var data = {"sender":id,"info":document.querySelector("input").value};
+	      socket.send(JSON.stringify(data));
+	  }
+	  
+	  document.querySelector("button").addEventListener("click", function() {
+		html2canvas(document.body).then(function(canvas) {
+            var data = {"msgType":"img","uri":canvas.toDataURL()};
+            socket.send(JSON.stringify(data));
+        });
+	}, false);
+	  
+  </script>
+</html>
