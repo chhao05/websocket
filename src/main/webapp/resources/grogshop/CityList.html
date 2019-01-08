@@ -2,18 +2,47 @@
 <html>
   
   <head>
-    <title>仿格子微酒店触屏版html5手机wap旅游网站模板下载选择城市-跟版网www.genban.org</title>
+    <title>酒店预订</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" />
     <meta content="yes" name="apple-mobile-web-app-capable" />
     <meta charset="UTF-8">
     <link href="styles/bootstrap.min.css" rel="stylesheet" />
     <link href="styles/NewGlobal.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="http://gmu.baidu.com/assets/widget/calendar/calendar.css" />
+    <link rel="stylesheet" type="text/css" href="http://gmu.baidu.com/assets/widget/calendar/calendar.index.css" />
+    <style>
+    	.section { 
+	    	background: #f3f3f3; 
+	    	font-size: 14px; 
+    	} 
+    	#datepicker_wrap { 
+    		overflow: hidden; height: 0; 
+    		-webkit-transition: height 200ms ease-in-out; 
+    		background: #e1e1e1; 
+    		-webkit-box-sizing:border-box; 
+    		box-sizing:border-box; 
+    	} 
+    	#datepicker_wrap>div { 
+    		display: none; 
+    		padding: 5px 5px 25px 5px; 
+    	} 
+    	.filter { 
+    		padding: 10px; 
+    	} 
+    	.filter:after { content: '\0020'; clear: both; display: block; height: 0; font-size: 0; line-height: 0; } 
+    	a.datebox { border: 1px solid #e1e1e1; text-decoration: none; color: #000; padding: 5px 26px 5px 5px; margin: 0px 5px 0 0; position: relative; background: #fff; top: 5px; } 
+    	.ui-icon-down { position: absolute; top: 50%; right: 5px; background-image: url("http://gmu.baidu.com/demo/assets/icons-36-black.png"); -webkit-background-size: 776px 18px; background-size: 776px 18px; width:18px; height: 18px; margin-top: -9px; background-position: -216px 50%; } 
+    	.filter a.ui-state-active, .filter a.ui-state-hover { background: #fff; } 
+    	.filter a.ui-state-active .ui-icon-down, .filter a.ui-state-hover .ui-icon-down { background-position: -180px 50%; } 
+    	.filter a.search { float: right; padding: 5px; margin: 0; } 
+    	.result { padding: 15px; text-align: left; }
+    </style>
     <script type="text/javascript" src="Scripts/zepto.js"></script>
   </head>
   
   <body>
     <div class="header">
-      <a href="index.htm" class="home">
+      <a href="index.html" class="home">
         <span class="header-icon header-icon-home"></span>
         <span class="header-name">主页</span></a>
       <div class="title" id="titleString">选择城市</div>
@@ -28,12 +57,9 @@
     <script type="text/javascript" src="http://gmu.baidu.com/src/core/event.js"></script>
     <script type="text/javascript" src="http://gmu.baidu.com/src/core/widget.js"></script>
     <script type="text/javascript" src="http://gmu.baidu.com/src/widget/calendar/calendar.js"></script>
-    <link rel="stylesheet" type="text/css" href="http://gmu.baidu.com/assets/widget/calendar/calendar.css" />
-    <link rel="stylesheet" type="text/css" href="http://gmu.baidu.com/assets/widget/calendar/calendar.index.css" />
     <div class="container width90 pt20">
       <form class="form-horizontal" action="HotelList.aspx" method="GET" id="form1">
         <ul class="search-group unstyled">
-          <style>.section { background: #f3f3f3; font-size: 14px; } #datepicker_wrap { overflow: hidden; height: 0; -webkit-transition: height 200ms ease-in-out; background: #e1e1e1; -webkit-box-sizing:border-box; box-sizing:border-box; } #datepicker_wrap>div { display: none; padding: 5px 5px 25px 5px; } .filter { padding: 10px; } .filter:after { content: '\0020'; clear: both; display: block; height: 0; font-size: 0; line-height: 0; } a.datebox { border: 1px solid #e1e1e1; text-decoration: none; color: #000; padding: 5px 26px 5px 5px; margin: 0px 5px 0 0; position: relative; background: #fff; top: 5px; } .ui-icon-down { position: absolute; top: 50%; right: 5px; background-image: url("http://gmu.baidu.com/demo/assets/icons-36-black.png"); -webkit-background-size: 776px 18px; background-size: 776px 18px; width:18px; height: 18px; margin-top: -9px; background-position: -216px 50%; } .filter a.ui-state-active, .filter a.ui-state-hover { background: #fff; } .filter a.ui-state-active .ui-icon-down, .filter a.ui-state-hover .ui-icon-down { background-position: -180px 50%; } .filter a.search { float: right; padding: 5px; margin: 0; } .result { padding: 15px; text-align: left; }</style>
           <li>
             <div class="coupon-nav coupon-nav-style">
               <span class="search-icon location-icon"></span>
@@ -83,8 +109,8 @@
             $(function() { //dom ready
               var open = null,
               today = new Date();
-              var beginday = '2014-04-11';
-              var endday = '2014-04-12';
+              var beginday = today.getFullYear()+'-'+ today.getMonth()+''+today.getDate();
+              var endday = beginday;
               //设置开始时间为今天
               $('#datestart').html(beginday + '<span class="ui-icon-down"></span>');
               //设置结束事件
@@ -145,8 +171,9 @@
             });
           })(Zepto);</script>
         <div class="control-group tc">
-          <button class="btn-large green button width80" style="padding-left:0px;padding-right: 0px;" ID="btnOK">
-            <A HREF="HotelList.aspxcheckInDate.html">立即查找</A></button>
+           <a class="btn-large green button width80" style="padding-left:0px;padding-right: 0px;" href="HotelList.aspxcheckInDate.html">
+           	立即查找 
+           </a>
         </div>
         <div class="control-group tc">
           <a href="NearHotel.aspx" style="padding-left:0px;padding-right: 0px;" class="btn-large green button width80">附近酒店</a></div>
