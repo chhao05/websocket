@@ -1,26 +1,28 @@
-
 <!DOCTYPE html>
 <html>
-<head><title>
-	·Â¸ñ×ÓÎ¢¾Æµê´¥ÆÁ°æhtml5ÊÖ»úwapÂÃÓÎÍøÕ¾Ä£°åÏÂÔØÑ¡Ôñ³ÇÊĞ-¸ú°æÍøwww.genban.org
-</title><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" /><meta content="yes" name="apple-mobile-web-app-capable" /><link href="styles/bootstrap.min.css" rel="stylesheet" /><link href="styles/NewGlobal.css" rel="stylesheet" />
+  
+  <head>
+    <title>ä»¿æ ¼å­å¾®é…’åº—è§¦å±ç‰ˆhtml5æ‰‹æœºwapæ—…æ¸¸ç½‘ç«™æ¨¡æ¿ä¸‹è½½é€‰æ‹©åŸå¸‚-è·Ÿç‰ˆç½‘www.genban.org</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta charset="UTF-8">
+    <link href="styles/bootstrap.min.css" rel="stylesheet" />
+    <link href="styles/NewGlobal.css" rel="stylesheet" />
     <script type="text/javascript" src="Scripts/zepto.js"></script>
-</head>
-<body>
- <div class="header">
- <a href="index.htm" class="home">
-            <span class="header-icon header-icon-home"></span>
-            <span class="header-name">Ö÷Ò³</span>
-</a>
-<div class="title" id="titleString">Ñ¡Ôñ³ÇÊĞ</div>
-<a href="javascript:history.go(-1);" class="back">
-            <span class="header-icon header-icon-return"></span>
-            <span class="header-name">·µ»Ø</span>
-        </a>
- </div>
-
-        
-    <script type="text/javascript" src="http://gmu.baidu.com/src/extend/touch.js"></script><!--ĞÂ°æzeptoºÏ²¢°æÖĞ²»°üÀ¨touch.js-->
+  </head>
+  
+  <body>
+    <div class="header">
+      <a href="index.htm" class="home">
+        <span class="header-icon header-icon-home"></span>
+        <span class="header-name">ä¸»é¡µ</span></a>
+      <div class="title" id="titleString">é€‰æ‹©åŸå¸‚</div>
+      <a href="javascript:history.go(-1);" class="back">
+        <span class="header-icon header-icon-return"></span>
+        <span class="header-name">è¿”å›</span></a>
+    </div>
+    <script type="text/javascript" src="http://gmu.baidu.com/src/extend/touch.js"></script>
+    <!--æ–°ç‰ˆzeptoåˆå¹¶ç‰ˆä¸­ä¸åŒ…æ‹¬touch.js-->
     <script type="text/javascript" src="http://gmu.baidu.com/src/extend/highlight.js"></script>
     <script type="text/javascript" src="http://gmu.baidu.com/src/core/gmu.js"></script>
     <script type="text/javascript" src="http://gmu.baidu.com/src/core/event.js"></script>
@@ -28,204 +30,138 @@
     <script type="text/javascript" src="http://gmu.baidu.com/src/widget/calendar/calendar.js"></script>
     <link rel="stylesheet" type="text/css" href="http://gmu.baidu.com/assets/widget/calendar/calendar.css" />
     <link rel="stylesheet" type="text/css" href="http://gmu.baidu.com/assets/widget/calendar/calendar.index.css" />
-       <div class="container width90 pt20">
- <form class="form-horizontal" action="HotelList.aspx" method="GET" id="form1">
-<ul class="search-group unstyled">
-	  <style>
-        .section {
-            background: #f3f3f3;
-            font-size: 14px;
-        }
-        #datepicker_wrap {
-            overflow: hidden;
-            height: 0;
-            -webkit-transition: height 200ms ease-in-out;
-            background: #e1e1e1;
-            -webkit-box-sizing:border-box;
-            box-sizing:border-box;
-        }
-        #datepicker_wrap>div {
-            display: none;
-            padding: 5px 5px 25px 5px;
-        }
+    <div class="container width90 pt20">
+      <form class="form-horizontal" action="HotelList.aspx" method="GET" id="form1">
+        <ul class="search-group unstyled">
+          <style>.section { background: #f3f3f3; font-size: 14px; } #datepicker_wrap { overflow: hidden; height: 0; -webkit-transition: height 200ms ease-in-out; background: #e1e1e1; -webkit-box-sizing:border-box; box-sizing:border-box; } #datepicker_wrap>div { display: none; padding: 5px 5px 25px 5px; } .filter { padding: 10px; } .filter:after { content: '\0020'; clear: both; display: block; height: 0; font-size: 0; line-height: 0; } a.datebox { border: 1px solid #e1e1e1; text-decoration: none; color: #000; padding: 5px 26px 5px 5px; margin: 0px 5px 0 0; position: relative; background: #fff; top: 5px; } .ui-icon-down { position: absolute; top: 50%; right: 5px; background-image: url("http://gmu.baidu.com/demo/assets/icons-36-black.png"); -webkit-background-size: 776px 18px; background-size: 776px 18px; width:18px; height: 18px; margin-top: -9px; background-position: -216px 50%; } .filter a.ui-state-active, .filter a.ui-state-hover { background: #fff; } .filter a.ui-state-active .ui-icon-down, .filter a.ui-state-hover .ui-icon-down { background-position: -180px 50%; } .filter a.search { float: right; padding: 5px; margin: 0; } .result { padding: 15px; text-align: left; }</style>
+          <li>
+            <div class="coupon-nav coupon-nav-style">
+              <span class="search-icon location-icon"></span>
+              <span class="coupon-label">é€‰æ‹©åŸå¸‚ï¼š</span>
+              <span class="coupon-input">
+                <span style="font-size: 16px; line-height: 35px;" id="cityname">å…¨éƒ¨åŸå¸‚</span></span>
+            </div>
+            <div class="citybox">
+              <span cityId="0">å…¨éƒ¨</span>
+              <span cityId="771">å—å®</span>
+              <span cityId="773">æ¡‚æ—</span>
+              <span cityId="371">éƒ‘å·</span></div>
+          </li>
+          <li>
+            <div class="coupon-nav coupon-nav-style">
+              <span class="search-icon time-icon"></span>
+              <span class="coupon-label">å…¥ä½æ—¥æœŸï¼š</span>
+              <span class="coupon-input">
+                <a id="datestart" class="datebox" href="javascript:void(0)">
+                  <span class="ui-icon-down"></span>
+                </a>
+              </span>
+            </div>
+            <div id="dp_start" class="none">
+              <div id="datepicker_start"></div>
+            </div>
+          </li>
+          <li>
+            <div class="coupon-nav coupon-nav-style">
+              <span class="search-icon time-icon"></span>
+              <span class="coupon-label">ç¦»åº—æ—¥æœŸï¼š</span>
+              <span class="coupon-input">
+                <a id="dateend" class="datebox" href="javascript:void(0)">
+                  <span class="ui-icon-down"></span>
+                </a>
+              </span>
+            </div>
+            <div id="dp_end" class="none">
+              <div id="datepicker_end"></div>
+            </div>
+          </li>
+        </ul>
+        <input id="checkInDate" name="checkInDate" value="2014-04-11" type="hidden" />
+        <input id="checkOutDate" name="checkOutDate" value="2014-04-12" type="hidden" />
+        <input id="cityID" name="cityID" value="0" type="hidden" />
+        <script type="text/javascript">(function($, undefined) {
+            $(function() { //dom ready
+              var open = null,
+              today = new Date();
+              var beginday = '2014-04-11';
+              var endday = '2014-04-12';
+              //è®¾ç½®å¼€å§‹æ—¶é—´ä¸ºä»Šå¤©
+              $('#datestart').html(beginday + '<span class="ui-icon-down"></span>');
+              //è®¾ç½®ç»“æŸäº‹ä»¶
+              $('#dateend').html(endday + '<span class="ui-icon-down"></span>');
+              $('#datepicker_start').calendar({ //åˆå§‹åŒ–å¼€å§‹æ—¶é—´çš„datepicker
+                date: $('#datestart').text(),
+                //è®¾ç½®åˆå§‹æ—¥æœŸä¸ºæ–‡æœ¬å†…å®¹
+                minDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()),
+                //è®¾ç½®æœ€å°æ—¥æœŸä¸ºå½“æœˆç¬¬ä¸€å¤©ï¼Œæ—¢ä¸Šä¸€æœˆçš„ä¸èƒ½é€‰
+                maxDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 25),
+                //è®¾ç½®æœ€å¤§æ—¥æœŸä¸ºç»“æŸæ—¥æœŸï¼Œç»“æŸæ—¥æœŸä»¥åçš„å¤©ä¸èƒ½é€‰
+                select: function(e, date, dateStr) { //å½“é€‰ä¸­æŸä¸ªæ—¥æœŸæ—¶ã€‚
+                  var day1 = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1);
+                  $('#datepicker_end').calendar('minDate', day1).calendar('refresh'); //å°†ç»“æŸæ—¶é—´çš„datepickçš„æœ€å°æ—¥æœŸè®¾æˆæ‰€é€‰æ—¥æœŸ
+                  $('#dp_start').toggle();
+                  //æŠŠæ‰€é€‰æ—¥æœŸèµ‹å€¼ç»™æ–‡æœ¬
+                  $('#datestart').html(dateStr + '<span class="ui-icon-down"></span>').removeClass('ui-state-active');
+                  $('#checkInDate').val(dateStr);
 
-        .filter {
-            padding: 10px;
-        
-        }
-        .filter:after {
-            content: '\0020';
-            clear: both;
-            display: block;
-            height: 0;
-            font-size: 0;
-            line-height: 0;
-        }
-
-        a.datebox {
-            border: 1px solid #e1e1e1;
-            text-decoration: none;
-            color: #000;
-            padding: 5px 26px 5px 5px;
-            margin: 0px 5px 0 0;
-            position: relative;
-            background: #fff;
-            top: 5px;
-        }
-
-       .ui-icon-down {
-            position: absolute;
-            top: 50%;
-            right: 5px;
-            background-image: url("http://gmu.baidu.com/demo/assets/icons-36-black.png");
-            -webkit-background-size: 776px 18px;
-            background-size: 776px 18px;
-            width:18px;
-            height: 18px;
-            margin-top: -9px;
-            background-position: 	-216px 50%;
-        }
-        .filter a.ui-state-active, .filter a.ui-state-hover {
-            background: #fff;
-        }
-        .filter a.ui-state-active .ui-icon-down, .filter a.ui-state-hover .ui-icon-down {
-            background-position: 	-180px 50%;
-        }
-
-        .filter a.search {
-            float: right;
-            padding: 5px;
-            margin: 0;
-        }
-        .result {
-            padding: 15px;
-            text-align: left;
-        }
-    </style>	
-				<li>
-					<div class="coupon-nav coupon-nav-style">
-						<span class="search-icon location-icon"></span>
-						<span class="coupon-label">Ñ¡Ôñ³ÇÊĞ£º</span>
-					    <span class="coupon-input"> <span style="font-size: 16px; line-height: 35px;" id="cityname">È«²¿³ÇÊĞ</span></span>
-					</div>
-                   <div class="citybox">
-                      <span cityId="0">È«²¿</span> 
-                      <span cityId="771">ÄÏÄş</span> 
-                      <span cityId="773">¹ğÁÖ</span> 
- <span cityId="371">Ö£Öİ</span> 
-                   </div>
-				</li>
-			<li>
-					<div class="coupon-nav coupon-nav-style">
-						<span class="search-icon time-icon"></span>
-						<span class="coupon-label">Èë×¡ÈÕÆÚ£º</span>
-					    <span class="coupon-input"><a id="datestart" class="datebox" href="javascript:void(0)"><span class="ui-icon-down"></span></a></span>
-					</div>
-                    <div id="dp_start" class="none">
-                     <div id="datepicker_start"></div>
-                     </div>
-				</li>
-                  <li>
-					<div class="coupon-nav coupon-nav-style">
-						<span class="search-icon time-icon"></span>
-						<span class="coupon-label">ÀëµêÈÕÆÚ£º</span>
-					    <span class="coupon-input"><a id="dateend"  class="datebox"  href="javascript:void(0)"><span class="ui-icon-down"></span></a></span>
-					</div>
-                    <div id="dp_end" class="none">
-                     <div id="datepicker_end"></div>
-                     </div>
-				</li>
-   
-                </ul>
-                 <input id="checkInDate" name="checkInDate" value="2014-04-11" type="hidden" />
-                 <input id="checkOutDate" name="checkOutDate" value="2014-04-12" type="hidden" />
-                 <input id="cityID" name="cityID" value="0" type="hidden" />
-<script type="text/javascript">
-    (function ($, undefined) {
-        $(function () {//dom ready
-            var open = null, today = new Date();
-            var beginday = '2014-04-11';
-            var endday = '2014-04-12';
-            //ÉèÖÃ¿ªÊ¼Ê±¼äÎª½ñÌì
-            $('#datestart').html(beginday + '<span class="ui-icon-down"></span>');
-            //ÉèÖÃ½áÊøÊÂ¼ş
-            $('#dateend').html(endday +
-                '<span class="ui-icon-down"></span>');
-            $('#datepicker_start').calendar({//³õÊ¼»¯¿ªÊ¼Ê±¼äµÄdatepicker
-                date: $('#datestart').text(), //ÉèÖÃ³õÊ¼ÈÕÆÚÎªÎÄ±¾ÄÚÈİ
-                minDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()), //ÉèÖÃ×îĞ¡ÈÕÆÚÎªµ±ÔÂµÚÒ»Ìì£¬¼ÈÉÏÒ»ÔÂµÄ²»ÄÜÑ¡
-                maxDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 25), //ÉèÖÃ×î´óÈÕÆÚÎª½áÊøÈÕÆÚ£¬½áÊøÈÕÆÚÒÔºóµÄÌì²»ÄÜÑ¡
-                select: function (e, date, dateStr) {//µ±Ñ¡ÖĞÄ³¸öÈÕÆÚÊ±¡£
-                    var day1 = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1);
-                    $('#datepicker_end').calendar('minDate', day1).calendar('refresh'); //½«½áÊøÊ±¼äµÄdatepickµÄ×îĞ¡ÈÕÆÚÉè³ÉËùÑ¡ÈÕÆÚ
-                    $('#dp_start').toggle();
-                    //°ÑËùÑ¡ÈÕÆÚ¸³Öµ¸øÎÄ±¾
-                    $('#datestart').html(dateStr + '<span class="ui-icon-down"></span>').removeClass('ui-state-active');
-                    $('#checkInDate').val(dateStr);
-                    
-                    $('#dateend').html($.calendar.formatDate(day1) + '<span class="ui-icon-down"></span>').removeClass('ui-state-active');
-                    $('#checkOutDate').val($.calendar.formatDate(day1));
+                  $('#dateend').html($.calendar.formatDate(day1) + '<span class="ui-icon-down"></span>').removeClass('ui-state-active');
+                  $('#checkOutDate').val($.calendar.formatDate(day1));
                 }
-            });
-            $('#datepicker_end').calendar({//³õÊ¼»¯½áÊøÊ±¼äµÄdatepicker
-                date: $('#dateend').text(), //ÉèÖÃ³õÊ¼ÈÕÆÚÎªÎÄ±¾ÄÚÈİ
+              });
+              $('#datepicker_end').calendar({ //åˆå§‹åŒ–ç»“æŸæ—¶é—´çš„datepicker
+                date: $('#dateend').text(),
+                //è®¾ç½®åˆå§‹æ—¥æœŸä¸ºæ–‡æœ¬å†…å®¹
                 minDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1),
                 maxDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 16),
-                select: function (e, date, dateStr) {//µ±Ñ¡ÖĞÄ³¸öÈÕÆÚÊ±¡£
-                    //ÊÕÆğdatepicker
-                    open = null;
-                    $('#dp_end').toggle();
-                    //°ÑËùÑ¡ÈÕÆÚ¸³Öµ¸øÎÄ±¾
-                    $('#dateend').html(dateStr + '<span class="ui-icon-down"></span>').removeClass('ui-state-active');
-                    $('#checkOutDate').val(dateStr);
+                select: function(e, date, dateStr) { //å½“é€‰ä¸­æŸä¸ªæ—¥æœŸæ—¶ã€‚
+                  //æ”¶èµ·datepicker
+                  open = null;
+                  $('#dp_end').toggle();
+                  //æŠŠæ‰€é€‰æ—¥æœŸèµ‹å€¼ç»™æ–‡æœ¬
+                  $('#dateend').html(dateStr + '<span class="ui-icon-down"></span>').removeClass('ui-state-active');
+                  $('#checkOutDate').val(dateStr);
                 }
-            });
-            $('#datestart').click(function (e) {//Õ¹¿ª»òÊÕÆğÈÕÆÚ
+              });
+              $('#datestart').click(function(e) { //å±•å¼€æˆ–æ”¶èµ·æ—¥æœŸ
                 $('#datestart').removeClass('ui-state-active');
-                var type = $(this).addClass('ui-state-active').is('#datestart') ? 'start' : 'end';
+                var type = $(this).addClass('ui-state-active').is('#datestart') ? 'start': 'end';
                 $('#dp_start').toggle();
 
-            }).highlight('ui-state-hover');
-            $('#cityname').click(function (e) {
+              }).highlight('ui-state-hover');
+              $('#cityname').click(function(e) {
                 $('.citybox').toggle();
-            });
-            $('.citybox span').click(function (e) {
+              });
+              $('.citybox span').click(function(e) {
                 $('#cityname').text($(this).text());
                 $('.citybox').toggle();
                 $('#cityID').val($(this).attr("cityId"));
-            });
-            $('#dateend').click(function (e) {//Õ¹¿ª»òÊÕÆğÈÕÆÚ
+              });
+              $('#dateend').click(function(e) { //å±•å¼€æˆ–æ”¶èµ·æ—¥æœŸ
                 $('#dateend').removeClass('ui-state-active');
-                var type = $(this).addClass('ui-state-active').is('#dateend') ? 'start' : 'end';
+                var type = $(this).addClass('ui-state-active').is('#dateend') ? 'start': 'end';
                 $('#dp_end').toggle();
 
-            }).highlight('ui-state-hover');
-        });
-    })(Zepto);
-</script>
-     <div class="control-group tc">
-         <button class="btn-large green button width80" style="padding-left:0px;padding-right: 0px;" ID="btnOK" ><A HREF="HotelList.aspxcheckInDate.html">Á¢¼´²éÕÒ</A></button>
-  </div>
-  <div class="control-group tc">
-         <a href="NearHotel.aspx" style="padding-left:0px;padding-right: 0px;"  class="btn-large green button width80">¸½½ü¾Æµê</a>
-  </div>
-                </form>
-         </div>
+              }).highlight('ui-state-hover');
+            });
+          })(Zepto);</script>
+        <div class="control-group tc">
+          <button class="btn-large green button width80" style="padding-left:0px;padding-right: 0px;" ID="btnOK">
+            <A HREF="HotelList.aspxcheckInDate.html">ç«‹å³æŸ¥æ‰¾</A></button>
+        </div>
+        <div class="control-group tc">
+          <a href="NearHotel.aspx" style="padding-left:0px;padding-right: 0px;" class="btn-large green button width80">é™„è¿‘é…’åº—</a></div>
+      </form>
+    </div>
+    <div class="footer">
+      <div class="gezifooter">
+        <a href="login.aspx" class="ui-link">ç«‹å³ç™»é™†</a>
+        <font color="#878787">|</font>
+        <a href="reg.aspx" class="ui-link">å…è´¹æ³¨å†Œ</a>
+        <font color="#878787">|</font>
+        <a href="../www.gridinn.com/@display=pc" class="ui-link">ç”µè„‘ç‰ˆ</a></div>
+      <div class="gezifooter">
+        <p style="color:#bbb;">æ ¼å­å¾®é…’åº—è¿é” &copy; ç‰ˆæƒæ‰€æœ‰ 2012-2014</p></div>
+    </div>
+  </body>
 
-
-  <div class="footer">
-  <div class="gezifooter">
-      
-      <a href="login.aspx" class="ui-link">Á¢¼´µÇÂ½</a> <font color="#878787">|</font> 
-       <a href="reg.aspx" class="ui-link">Ãâ·Ñ×¢²á</a> <font color="#878787">|</font>                 
-                  
-
-       <a href="../www.gridinn.com/@display=pc" class="ui-link">µçÄÔ°æ</a>
-  </div>
-  <div class="gezifooter">
-    <p style="color:#bbb;">¸ñ×ÓÎ¢¾ÆµêÁ¬Ëø &copy; °æÈ¨ËùÓĞ 2012-2014</p>
-  </div>
-  </div>
-
-</body>
 </html>
