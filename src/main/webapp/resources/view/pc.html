@@ -22,53 +22,58 @@
 	}
   </style> 
   <script type="text/javascript">  
-	  var socket;   
-	  var id  = "PC";
-	  if(window.WebSocket){  
-	      socket = new WebSocket("ws://localhost:7397");  
-	      socket.onmessage = function(event){             
-	            var data = JSON.parse(event.data);
-            	document.querySelector("#name").innerText=data.sender
-	            if(data.msgType=='img'){
-	            	document.querySelector("img").src=data.uri;
-	            	appendln(data.sender,"Img"); 
-	            }else{
-	            	appendln(data.sender,data.info); 
-	            }
-	      };  
-	   
-	      socket.onopen = function(event){  
-	            login(); 
-	      };  
-	   
-	      socket.onclose = function(event){  
-	            appendln("WebSocket is closed");  
-	      };  
-	  }else{  
-	        alert("WebSocket is not support");  
-	  }  
+	  var socket;
+	  var id = "PC";
+	  if (window.WebSocket) {
+	      socket = new WebSocket("ws://localhost:7397");
+	      socket.onmessage = function(event) {
+	          var data = JSON.parse(event.data);
+	          document.querySelector("#name").innerText = data.sender
+	          if (data.msgType == 'img') {
+	              document.querySelector("img").src = data.uri;
+	              appendln(data.sender, "Img");
+	          } else {
+	              appendln(data.sender, data.info);
+	          }
+	      };
 	
-	    
-	  function appendln(sender,info) {  
-	    var dev = document.getElementById('responseText');  
-	    var chat = document.createElement('div');
-	    var namespan = document.createElement('span');
-	    namespan.innerText = sender+"：";
-	    chat.appendChild(namespan);
-	    var infospan = document.createElement('span');
-	    infospan.innerText = info;
-	    chat.appendChild(infospan);
-	    dev.appendChild(chat);
-	  }  
-	    
-	  function login(){
-	      var date={"id":id,"type":"aa"};
+	      socket.onopen = function(event) {
+	          login();
+	      };
+	
+	      socket.onclose = function(event) {
+	          appendln("WebSocket is closed");
+	      };
+	  } else {
+	      alert("WebSocket is not support");
+	  }
+	
+	  function appendln(sender, info) {
+	      var dev = document.getElementById('responseText');
+	      var chat = document.createElement('div');
+	      var namespan = document.createElement('span');
+	      namespan.innerText = sender + "：";
+	      chat.appendChild(namespan);
+	      var infospan = document.createElement('span');
+	      infospan.innerText = info;
+	      chat.appendChild(infospan);
+	      dev.appendChild(chat);
+	  }
+	
+	  function login() {
+	      var date = {
+	          "id": id,
+	          "type": "aa"
+	      };
 	      var login = JSON.stringify(date);
 	      socket.send(login);
 	  }
-	  
-	  function sendMessage(){
-		  var data = {"sender":id,"info":document.querySelector("#chatInput").value};
+	
+	  function sendMessage() {
+	      var data = {
+	          "sender": id,
+	          "info": document.querySelector("#chatInput").value
+	      };
 	      socket.send(JSON.stringify(data));
 	  }
 	  
