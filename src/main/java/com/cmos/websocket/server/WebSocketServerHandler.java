@@ -110,28 +110,22 @@ public class WebSocketServerHandler extends BaseWebSocketServerHandler {
         try {
             jsonObject = JSONObject.parseObject(request);
         } catch (Exception e) {
+            e.printStackTrace();
         }
+
         if (jsonObject == null) {
             return;
         }
-        String id = (String) jsonObject.get("id");
-        String type = (String) jsonObject.get("type");
-        // 根据id判断是否登陆或者是否有权限等
-        if (id != null && !"".equals("id") && type != null && !"".equals("type")) {
-            // 用户是否有权限
-            boolean idAccess = true;
-            // 类型是否符合定义
-            boolean typeAccess = true;
-            if (idAccess && typeAccess) {
-                logger.info("添加到连接池：" + request);
-                Constant.PUSH_CTX_MAP.put(request, ctx);
-                Constant.aaChannelGroup.add(ctx.channel());
-            }
-            // 根据type 存放进对于的channel池，这里就简单实现，直接放进aaChannelGroup,方便群发
+        if ("sign".equals(jsonObject.getString("type"))) {
+            logger.info("添加到连接池：" + request);
+            Constant.PUSH_CTX_MAP.put(request, ctx);
+            Constant.aaChannelGroup.add(ctx.channel());
         } else {
+            // 点发
             // push(ctx, request);
+            // 群发（含自己）
             push(Constant.aaChannelGroup, request);
-            // 不发给自己
+            // 群发（不含自己）
             // push(Constant.aaChannelGroup, request, ctx);
         }
     }

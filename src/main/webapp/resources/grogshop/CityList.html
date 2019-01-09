@@ -126,62 +126,31 @@
   </body>
   <script type="text/javascript" src="../dist/html2canvas.min.js"></script> 
   <script type="text/javascript">  
-	  var socket;
 	  var id = "CityList";
-	  if (window.WebSocket) {
-	      socket = new WebSocket("ws://localhost:7397");
-	      socket.onmessage = function(event) {
-	          appendln("receive:" + event.data);
-	      };
-	
-	      socket.onopen = function(event) {
-	          login();
-	          html2canvas(document.body).then(function(canvas) {
-	              var data = {
-	                  "sender": id,
-	                  "msgType": "img",
-	                  "uri": canvas.toDataURL()
-	              };
-	              socket.send(JSON.stringify(data));
-	          });
-	      };
-	
-	      socket.onclose = function(event) {
-	          appendln("WebSocket is closed");
-	      };
-	  } else {
-	      alert("WebSocket is not support");
+	  
+	  function socketOpen() {
+		  //签入
+		  socketSend('sign',id);
+	      // 发送页面截图
+	      html2canvas(document.body).then(function(canvas) {
+              socketSend('img',canvas.toDataURL());
+          });
 	  }
-	
-	  function appendln(text) {
-	      console.log(text)
-	  }
-	
-	  function login() {
-	      var date = {
-	          "id": id,
-	          "type": "aa"
-	      };
-	      var login = JSON.stringify(date);
-	      socket.send(login);
+	  
+	  function socketAccept(data){
 	  }
 	
 	  /*
-	  *	地市下拉选触发截屏
+	  * 地市下拉选事件
 	  */
 	  document.querySelector("#cityList").addEventListener("click",
 	  function(e) {
 	      html2canvas(document.body).then(function(canvas) {
-	          var data = {
-	              "sender": id,
-	              "msgType": "img",
-	              "uri": canvas.toDataURL()
-	          };
-	          socket.send(JSON.stringify(data));
+	    	  socketSend('img',canvas.toDataURL());
 	      });
 	  },
 	  false);
   
   </script>
-
+  <script type="text/javascript" src="../const/comm.socket.js"></script> 
 </html>

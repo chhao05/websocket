@@ -22,32 +22,7 @@
 	}
   </style> 
   <script type="text/javascript">  
-	  var socket;
 	  var id = "PC";
-	  if (window.WebSocket) {
-	      socket = new WebSocket("ws://localhost:7397");
-	      socket.onmessage = function(event) {
-	          var data = JSON.parse(event.data);
-	          document.querySelector("#name").innerText = data.sender
-	          if (data.msgType == 'img') {
-	              document.querySelector("img").src = data.uri;
-	              appendln(data.sender, "Img");
-	          } else {
-	              appendln(data.sender, data.info);
-	          }
-	      };
-	
-	      socket.onopen = function(event) {
-	          login();
-	      };
-	
-	      socket.onclose = function(event) {
-	          appendln("WebSocket is closed");
-	      };
-	  } else {
-	      alert("WebSocket is not support");
-	  }
-	
 	  function appendln(sender, info) {
 	      var dev = document.getElementById('responseText');
 	      var chat = document.createElement('div');
@@ -60,24 +35,26 @@
 	      dev.appendChild(chat);
 	  }
 	
-	  function login() {
-	      var date = {
-	          "id": id,
-	          "type": "aa"
-	      };
-	      var login = JSON.stringify(date);
-	      socket.send(login);
+	  function sendMessage() {
+		  socketSend('text',document.querySelector("#chatInput").value);
 	  }
 	
-	  function sendMessage() {
-	      var data = {
-	          "sender": id,
-	          "info": document.querySelector("#chatInput").value
-	      };
-	      socket.send(JSON.stringify(data));
+	  function socketAccept(data) {
+	      document.querySelector("#name").innerText = data.id
+	      if (data.type == 'img') {
+	          document.querySelector("img").src = data.info;
+	          appendln(data.id, "Img");
+	      } else if(data.type == 'text'){
+	          appendln(data.id, data.info);
+	      }
+	  }
+	
+	  function socketOpen() {
+	      socketSend('sign',id);
 	  }
 	  
   </script>
+  <script type="text/javascript" src="../const/comm.socket.js"></script> 
  </head>  
  <body> 
  	<div>

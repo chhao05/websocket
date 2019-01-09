@@ -27,6 +27,16 @@
     
    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
         <property name="properties" ref="configProperties" />
-   </bean> 
-     
+   </bean>
+   
+   
+    <bean id="bossGroup" class="io.netty.channel.nio.NioEventLoopGroup"></bean>
+    <bean id="workerGroup" class="io.netty.channel.nio.NioEventLoopGroup"></bean>
+    <bean id="serverBootstrap" class="io.netty.bootstrap.ServerBootstrap" scope="prototype"></bean>
+    <bean id="webSocketServer" class="com.cmos.websocket.server.WebSocketServer">
+
+        <property name="port" value="7397"></property>
+        <property name="childChannelHandler" ref="webSocketChildChannelHandler" />
+    </bean> 
+    
 </beans>
