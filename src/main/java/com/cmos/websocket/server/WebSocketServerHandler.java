@@ -130,9 +130,9 @@ public class WebSocketServerHandler extends BaseWebSocketServerHandler {
             // 根据type 存放进对于的channel池，这里就简单实现，直接放进aaChannelGroup,方便群发
         } else {
             // push(ctx, request);
-            // push(Constant.aaChannelGroup, request);
+            push(Constant.aaChannelGroup, request);
             // 不发给自己
-            push(Constant.aaChannelGroup, request, ctx);
+            // push(Constant.aaChannelGroup, request, ctx);
         }
     }
 

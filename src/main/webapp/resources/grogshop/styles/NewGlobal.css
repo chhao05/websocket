@@ -439,8 +439,8 @@ margin-top: 10px;display: inline-block;max-width: 260px;
 .clear{clear: both}
 .defaultlist {
     width:100%;
-	display:-webkit-box;
-	display:-moz-box;
+	/* display:-webkit-box;
+	display:-moz-box; */
 	display:box;
     margin-bottom: 0px;
 }
@@ -448,9 +448,9 @@ margin-top: 10px;display: inline-block;max-width: 260px;
    	height:100px;
 	position:relative;
 	margin:0 0 5px 5px;
-	-webkit-box-flex:1;
+/* 	-webkit-box-flex:1;
 	-moz-box-flex:1;
-	box-flex:1;
+	box-flex:1; */
 }
 .defaultlist h3 {
 	position:absolute;
