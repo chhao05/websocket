@@ -1,4 +1,7 @@
+//本地开发
 var socketHost = 'ws://localhost:7397';
+//阿里云
+//var socketHost = 'ws://47.105.126.220:7397';
 
 var socket;
 if (window.WebSocket) {

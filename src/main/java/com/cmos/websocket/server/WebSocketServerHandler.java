@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSONObject;
 import com.cmos.websocket.constant.Constant;
+import com.cmos.websocket.init.BaseWebSocketServerHandler;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -85,6 +86,7 @@ public class WebSocketServerHandler extends BaseWebSocketServerHandler {
 
     public void handlerWebSocketFrame(ChannelHandlerContext ctx, WebSocketFrame frame) throws Exception {
         logger.info("WebSocketServerHandler.handlerWebSocketFrame");
+        logger.info(frame.getClass().toString());
         // 关闭请求
         if (frame instanceof CloseWebSocketFrame) {
             logger.info("WebSocketServerHandler.handlerWebSocketFrame.CloseWebSocketFrame");
@@ -139,7 +141,7 @@ public class WebSocketServerHandler extends BaseWebSocketServerHandler {
             return;
         }
         WebSocketServerHandshakerFactory wsFactory = new WebSocketServerHandshakerFactory(
-                "ws:/" + ctx.channel() + "/websocket", null, false);
+                "ws:/" + ctx.channel() + "/websocket", null, false, Short.MAX_VALUE * 4);
         handshaker = wsFactory.newHandshaker(req);
         if (handshaker == null) {
             // 不支持
