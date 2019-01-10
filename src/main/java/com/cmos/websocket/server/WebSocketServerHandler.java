@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.alibaba.fastjson.JSONObject;
 import com.cmos.websocket.constant.Constant;
 import com.cmos.websocket.init.BaseWebSocketServerHandler;
 
@@ -46,7 +45,8 @@ public class WebSocketServerHandler extends BaseWebSocketServerHandler {
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         logger.info("WebSocketServerHandler.channelActive:客户端连上了");
         // TODO websocket链接的消息接受不到
-        push(ctx, "连接成功");
+        // push(ctx, "连接成功");
+        Constant.aaChannelGroup.add(ctx.channel());
     }
 
     /**
@@ -85,8 +85,7 @@ public class WebSocketServerHandler extends BaseWebSocketServerHandler {
     }
 
     public void handlerWebSocketFrame(ChannelHandlerContext ctx, WebSocketFrame frame) throws Exception {
-        logger.info("WebSocketServerHandler.handlerWebSocketFrame");
-        logger.info(frame.getClass().toString());
+        logger.info(frame.getClass().getSimpleName());
         // 关闭请求
         if (frame instanceof CloseWebSocketFrame) {
             logger.info("WebSocketServerHandler.handlerWebSocketFrame.CloseWebSocketFrame");
@@ -104,32 +103,15 @@ public class WebSocketServerHandler extends BaseWebSocketServerHandler {
             logger.info("WebSocketServerHandler.handlerWebSocketFrame.Exception");
             throw new Exception("仅支持文本格式");
         }
-        logger.info("WebSocketServerHandler.handlerWebSocketFrame.TextWebSocketFrame");
         // 客服端发送过来的消息
         String request = ((TextWebSocketFrame) frame).text();
         logger.info("服务端收到：" + request);
-        JSONObject jsonObject = null;
-        try {
-            jsonObject = JSONObject.parseObject(request);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        if (jsonObject == null) {
-            return;
-        }
-        if ("sign".equals(jsonObject.getString("type"))) {
-            logger.info("添加到连接池：" + request);
-            Constant.PUSH_CTX_MAP.put(request, ctx);
-            Constant.aaChannelGroup.add(ctx.channel());
-        } else {
-            // 点发
-            // push(ctx, request);
-            // 群发（含自己）
-            push(Constant.aaChannelGroup, request);
-            // 群发（不含自己）
-            // push(Constant.aaChannelGroup, request, ctx);
-        }
+        // 点发
+        // push(ctx, request);
+        // 群发（含自己）
+        push(Constant.aaChannelGroup, request);
+        // 群发（不含自己）
+        // push(Constant.aaChannelGroup, request, ctx);
     }
 
     // 第一次请求是http请求，请求头包括ws的信息
@@ -174,10 +156,8 @@ public class WebSocketServerHandler extends BaseWebSocketServerHandler {
     // 异常处理，netty默认是关闭channel
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        logger.info("WebSocketServerHandler.exceptionCaught");
         // 输出日志
         logger.error("netty通信异常：", cause);
-        cause.printStackTrace();
         ctx.close();
     }
 }
