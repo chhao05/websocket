@@ -18,6 +18,7 @@ import io.netty.handler.codec.http.FullHttpRequest;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import io.netty.handler.codec.http.HttpVersion;
 import io.netty.handler.codec.http.websocketx.CloseWebSocketFrame;
+import io.netty.handler.codec.http.websocketx.ContinuationWebSocketFrame;
 import io.netty.handler.codec.http.websocketx.PingWebSocketFrame;
 import io.netty.handler.codec.http.websocketx.PongWebSocketFrame;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
@@ -38,14 +39,14 @@ public class WebSocketServerHandler extends BaseWebSocketServerHandler {
 
     private WebSocketServerHandshaker handshaker;
 
+    private StringBuffer prexfix = new StringBuffer();
+
     /**
      * 当客户端连接成功，返回个成功信息
      */
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        logger.info("WebSocketServerHandler.channelActive:客户端连上了");
-        // TODO websocket链接的消息接受不到
-        // push(ctx, "连接成功");
+        logger.info("......................channelActive");
         Constant.aaChannelGroup.add(ctx.channel());
     }
 
@@ -54,27 +55,24 @@ public class WebSocketServerHandler extends BaseWebSocketServerHandler {
      */
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-        logger.info("WebSocketServerHandler.channelInactive:客户端断开了");
+        logger.info("......................channelInactive");
         for (String key : Constant.PUSH_CTX_MAP.keySet()) {
             if (ctx.equals(Constant.PUSH_CTX_MAP.get(key))) {
                 // 从连接池内剔除
-                System.out.println(Constant.PUSH_CTX_MAP.size());
-                System.out.println("剔除" + key);
                 Constant.PUSH_CTX_MAP.remove(key);
-                System.out.println(Constant.PUSH_CTX_MAP.size());
             }
         }
     }
 
     @Override
     public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
-        logger.info("WebSocketServerHandler.channelReadComplete");
+        logger.info("......................channelReadComplete");
         ctx.flush();
     }
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
-        logger.info("WebSocketServerHandler.channelRead0");
+        logger.info("......................channelRead0");
         if (msg instanceof FullHttpRequest) {
             // http：//xxxx
             handleHttpRequest(ctx, (FullHttpRequest) msg);
@@ -85,33 +83,40 @@ public class WebSocketServerHandler extends BaseWebSocketServerHandler {
     }
 
     public void handlerWebSocketFrame(ChannelHandlerContext ctx, WebSocketFrame frame) throws Exception {
-        logger.info(frame.getClass().getSimpleName());
+        logger.info("......................" + frame.getClass().getSimpleName());
         // 关闭请求
         if (frame instanceof CloseWebSocketFrame) {
-            logger.info("WebSocketServerHandler.handlerWebSocketFrame.CloseWebSocketFrame");
             handshaker.close(ctx.channel(), (CloseWebSocketFrame) frame.retain());
             return;
         }
         // ping请求
         if (frame instanceof PingWebSocketFrame) {
-            logger.info("WebSocketServerHandler.handlerWebSocketFrame.PingWebSocketFrame");
             ctx.channel().write(new PongWebSocketFrame(frame.content().retain()));
             return;
         }
-        // 只支持文本格式，不支持二进制消息
-        if (!(frame instanceof TextWebSocketFrame)) {
-            logger.info("WebSocketServerHandler.handlerWebSocketFrame.Exception");
-            throw new Exception("仅支持文本格式");
+        // 文本消息
+        if (frame instanceof TextWebSocketFrame) {
+            String info = ((TextWebSocketFrame) frame).text();
+            logger.info("接受到消息：" + info);
+            if (info.endsWith("}")) {
+                prexfix = null;
+                push(Constant.aaChannelGroup, info);
+            } else {
+                prexfix = new StringBuffer(info);
+            }
+            return;
         }
-        // 客服端发送过来的消息
-        String request = ((TextWebSocketFrame) frame).text();
-        logger.info("服务端收到：" + request);
-        // 点发
-        // push(ctx, request);
-        // 群发（含自己）
-        push(Constant.aaChannelGroup, request);
-        // 群发（不含自己）
-        // push(Constant.aaChannelGroup, request, ctx);
+        // 未完结的消息
+        logger.info("遗留消息:" + prexfix.toString());
+        if (frame instanceof ContinuationWebSocketFrame) {
+            String info = ((ContinuationWebSocketFrame) frame).text();
+            logger.info("接受到消息：" + info);
+            prexfix.append(info);
+            if (info.endsWith("}")) {
+                info = prexfix.toString();
+                push(Constant.aaChannelGroup, info);
+            }
+        }
     }
 
     // 第一次请求是http请求，请求头包括ws的信息
@@ -123,7 +128,7 @@ public class WebSocketServerHandler extends BaseWebSocketServerHandler {
             return;
         }
         WebSocketServerHandshakerFactory wsFactory = new WebSocketServerHandshakerFactory(
-                "ws:/" + ctx.channel() + "/websocket", null, false, Short.MAX_VALUE * 4);
+                "ws:/" + ctx.channel() + "/websocket", null, false, Short.MAX_VALUE * 6);
         handshaker = wsFactory.newHandshaker(req);
         if (handshaker == null) {
             // 不支持
