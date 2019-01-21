@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
- <head id="Head1"> 
+ <head > 
   <title>格子微酒店连锁</title> 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" /> 
   <meta content="yes" name="apple-mobile-web-app-capable" /> 
   <meta charset="UTF-8" /> 
   <link href="styles/bootstrap.min.css" rel="stylesheet" /> 
-  <link href="styles/bootstrap-responsive.css" rel="stylesheet" /> 
   <link href="styles/NewGlobal.css" rel="stylesheet" /> 
  </head> 
  <body> 
@@ -49,16 +48,11 @@
     <p style="color:#bbb;">格子微酒店连锁 &copy; 版权所有 2012-2013</p> 
    </div> 
   </div>  
-  <script type="text/javascript" src="../dist/html2canvas.min.js"></script> 
   <script type="text/javascript">  
 	  var id = "Index";
 	  function socketOpen() {
 		  //签入
 		  socketSend('sign',id);
-	      // 发送页面截图
-	      html2canvas(document.body).then(function(canvas) {
-              socketSend('img',canvas.toDataURL());
-          });
 	  }
 	  
 	  function socketAccept(data){
@@ -66,5 +60,6 @@
 	
   </script> 
   <script type="text/javascript" src="../const/comm.socket.js"></script> 
+  <script type="text/javascript" src="../const/comm.event.js"></script> 
  </body>
 </html>

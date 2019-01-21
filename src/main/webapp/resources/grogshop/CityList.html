@@ -3,9 +3,10 @@
   
   <head>
     <title>酒店预订</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <meta content="yes" name="apple-mobile-web-app-capable" />
     <meta charset="UTF-8">
+    <link rel="icon" href="data:;base64,=">
     <link href="styles/bootstrap.min.css" rel="stylesheet" />
     <link href="styles/NewGlobal.css" rel="stylesheet" />
     <style>
@@ -64,12 +65,27 @@
             <div class="coupon-nav coupon-nav-style">
               <span class="search-icon location-icon"></span>
               <span class="coupon-label">选择城市：</span>
-              <select id="cityList">
+              <select id="cityList" 
+              	
+              >
 				  <option value ="合肥">合肥</option>
 				  <option value ="阜阳">阜阳</option>
 				  <option value ="安庆">安庆</option>
 				  <option value ="池州">池州</option>
 			  </select>
+            </div>
+          </li>
+          <li>
+            <div class="coupon-nav coupon-nav-style">
+              <span class="search-icon time-icon"></span>
+              <span class="coupon-label">选择房间号：</span>
+              <span class="coupon-input">
+              	<input id="house" onblur ="console.log('trigger document blur.......')" type="text" class="input-1 input-2" name="house"/>
+              	<input type="text" class="input-1 input-2" name="house2"/>
+              </span>
+            </div>
+            <div id="dp_start" class="none">
+              <div id="datepicker_start"></div>
             </div>
           </li>
           <li>
@@ -104,13 +120,17 @@
         <input id="checkInDate" name="checkInDate" value="2014-04-11" type="hidden" />
         <input id="checkOutDate" name="checkOutDate" value="2014-04-12" type="hidden" />
         <input id="cityID" name="cityID" value="0" type="hidden" />
-        <div class="control-group tc">
-           <a class="btn-large green button width80" style="padding-left:0px;padding-right: 0px;" href="HotelList.aspxcheckInDate.html">
-           	立即查找 
+        <div class="control-group tc" onclick="searchNow()">
+           <a id="clickMe"   class="btn-large green button width80" 
+           		style="padding-left:0px;padding-right: 0px;" href="javascript:void(0)">
+           	点我
            </a>
         </div>
-        <div class="control-group tc">
-          <a href="NearHotel.aspx" style="padding-left:0px;padding-right: 0px;" class="btn-large green button width80">附近酒店</a></div>
+        <div class="control-group tc" onclick="showDropdown()">
+          <a href="javascript:void(0)" 
+          	style="padding-left:0px;padding-right: 0px;" 
+          	class="btn-large green button width80">模拟点我</a>
+        </div>
       </form>
     </div>
     <div class="footer">
@@ -124,33 +144,7 @@
         <p style="color:#bbb;">格子微酒店连锁 &copy; 版权所有 2012-2014</p></div>
     </div>
   </body>
-  <script type="text/javascript" src="../dist/html2canvas.min.js"></script> 
-  <script type="text/javascript">  
-	  var id = "CityList";
-	  
-	  function socketOpen() {
-		  //签入
-		  socketSend('sign',id);
-	      // 发送页面截图
-	      html2canvas(document.body).then(function(canvas) {
-              socketSend('img',canvas.toDataURL());
-          });
-	  }
-	  
-	  function socketAccept(data){
-	  }
-	
-	  /*
-	  * 地市下拉选事件
-	  */
-	  document.querySelector("#cityList").addEventListener("change",
-	  function(e) {
-	      html2canvas(document.body).then(function(canvas) {
-	    	  socketSend('img',canvas.toDataURL());
-	      });
-	  },
-	  false);
-  
-  </script>
+  <script type="text/javascript" src="../dist/grogshop/cityList.js"></script> 
   <script type="text/javascript" src="../const/comm.socket.js"></script> 
+  <script type="text/javascript" src="../const/comm.event.js"></script> 
 </html>

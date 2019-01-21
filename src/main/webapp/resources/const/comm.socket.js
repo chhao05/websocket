@@ -1,30 +1,46 @@
 //本地开发
-var socketHost = 'ws://localhost:7397';
+var socketHost = 'ws://192.168.42.25:7397';
 //var socketHost = 'ws://192.168.42.200:7397';
 //阿里云
 //var socketHost = 'ws://47.105.126.220:7397';
 
 var socket;
-if (window.WebSocket) {
-    socket = new WebSocket(socketHost);
 
-    socket.onopen = function(event) {
-    	console.log('WebSocket is open...............')
-        socketOpen();
-    };
+document.addEventListener("DOMContentLoaded", function() {
+	initSocket();
+}, false);
 
-    socket.onmessage = function(event) {
-    	console.log('Receive：'+event.data);
-    	var data = JSON.parse(event.data);
-    	socketAccept(data);
-    };
-    
-    socket.onclose = function(event) {
-        console.log('WebSocket is closed.............')
-    };
-    
-} else {
-    console.warn("WebSocket is not support!");
+/**
+ * socket初始化
+ * @returns
+ */
+function initSocket(){
+	//监听端不建立连接
+	if(self !=top){
+		return ;
+	}
+	
+	if (window.WebSocket) {
+		socket = new WebSocket(socketHost);
+		
+		socket.onopen = function(event) {
+			console.log('WebSocket is open...............')
+			socketOpen();
+		};
+		
+		socket.onmessage = function(event) {
+			console.log('Receive：'+event.data);
+			var data = JSON.parse(event.data);
+			socketAccept(data);
+		};
+		
+		socket.onclose = function(event) {
+			console.log('WebSocket is closed.............')
+		};
+		
+	} else {
+		console.warn("WebSocket is not support!");
+	}
 }
 
 /**
@@ -39,6 +55,6 @@ function socketSend(msgType, msgContent) {
         "type": msgType,
         "info": msgContent
     };
-    socket.send(JSON.stringify(data));
+    socket && socket.send(JSON.stringify(data));
 }
 
