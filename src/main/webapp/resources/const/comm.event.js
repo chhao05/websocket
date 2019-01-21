@@ -34,10 +34,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 }, false);
 
-// 定义事件中无需进行网络传输的属性
-var USELESS_ATTRS = [ 'isTrusted', 'timeStamp', 'isComposing', 'detail',
-		'eventPhase', 'which', 'defaultPrevented', 'composed', 'returnValue',
-		'cancelBubble' ];
 /**
  * 事件封装处理
  * 
@@ -45,6 +41,10 @@ var USELESS_ATTRS = [ 'isTrusted', 'timeStamp', 'isComposing', 'detail',
  * @returns
  */
 function compressEvent(e) {
+	// 定义事件中无需进行网络传输的属性
+	this.USELESS_ATTRS = [ 'isTrusted', 'timeStamp', 'isComposing', 'detail',
+		'eventPhase', 'which', 'defaultPrevented', 'composed', 'returnValue',
+		'cancelBubble' ];
 	var event = {};
 	for (variable in e) {
 		var type = typeof e[variable];
@@ -62,7 +62,8 @@ function compressEvent(e) {
 	event.constructor = e.constructor.name;
 	// 元素支持value属性，则进行赋值
 	if (typeof e.target.value) {
-		event.value = e.target.value;
+		// 防止元素属性与事件属性重名
+		event.TARGET_VALUE = e.target.value;
 	}
 	// socket传播事件
 	socketSend('event', JSON.stringify(event));
@@ -182,8 +183,8 @@ function eventHandle(jsonStr) {
  */
 function simulateOperation(target, eventInit) {
 	// 支持value属性则进行赋值，输入回显
-	if (typeof eventInit.value) {
-		target.value = eventInit.value;
+	if (typeof eventInit.TARGET_VALUE) {
+		target.value = eventInit.TARGET_VALUE;
 	}
 	// 焦点事件
 	if (eventInit.constructor === 'FocusEvent') {
