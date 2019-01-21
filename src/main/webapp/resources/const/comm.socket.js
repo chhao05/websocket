@@ -1,5 +1,5 @@
 //本地开发
-var socketHost = 'ws://192.168.42.25:7397';
+var socketHost = 'ws://localhost:7397';
 //var socketHost = 'ws://192.168.42.200:7397';
 //阿里云
 //var socketHost = 'ws://47.105.126.220:7397';
@@ -24,7 +24,7 @@ function initSocket(){
 		socket = new WebSocket(socketHost);
 		
 		socket.onopen = function(event) {
-			console.log('WebSocket is open...............')
+			console && console.log('WebSocket is open...............')
 			socketOpen();
 		};
 		
@@ -35,11 +35,11 @@ function initSocket(){
 		};
 		
 		socket.onclose = function(event) {
-			console.log('WebSocket is closed.............')
+			console && console.info('WebSocket is closed.............')
 		};
 		
 	} else {
-		console.warn("WebSocket is not support!");
+		console && console.warn("WebSocket is not support!");
 	}
 }
 
