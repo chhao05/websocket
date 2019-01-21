@@ -45,7 +45,6 @@ var USELESS_ATTRS = [ 'isTrusted', 'timeStamp', 'isComposing', 'detail',
  * @returns
  */
 function compressEvent(e) {
-	console.log(e)
 	var event = {};
 	for (variable in e) {
 		var type = typeof e[variable];
@@ -100,7 +99,9 @@ function buildSelectors(event) {
 	if (event.target.id) {
 		var tagName = event.target.tagName;
 		if (tagName) {
-			return tagName.toLowerCase() + '#' + event.target.id
+			return tagName.toLowerCase() + '#' + event.target.id;
+		}else{
+			return  '#' + event.target.id;
 		}
 	}
 	var selectors = '';
